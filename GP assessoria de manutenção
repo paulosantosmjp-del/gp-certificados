@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GP Assessoria de Manutenções - Certificados</title>
+<style>
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#edf2f7;margin:0;padding:20px;color:#18324b}
+.painel{max-width:700px;margin:auto;background:white;padding:22px;border-radius:14px;box-shadow:0 3px 15px #0002}
+h1{text-align:center;color:#145b84}
+label{display:block;margin-top:15px;font-weight:bold}
+input{width:100%;padding:12px;margin-top:6px;border:1px solid #aaa;border-radius:7px;font-size:16px}
+button{background:#146b9a;color:white;border:0;padding:14px;width:100%;border-radius:8px;margin-top:20px;font-size:17px}
+#certificado{display:none;background:white;color:#17334d;border:12px double #c9a45b;padding:35px;text-align:center;min-height:480px}
+#certificado h2{font-size:32px;color:#145b84}
+.aluno{font-size:27px;font-weight:bold;overflow-wrap:anywhere}
+.assinatura{border-top:1px solid #333;max-width:300px;margin:65px auto 0;padding-top:10px}
+@media print{
+body{background:white;padding:0}
+.painel{display:none}
+#certificado{display:block!important;box-shadow:none;width:100%;border:10px double #c9a45b}
+}
+</style>
+</head>
+<body>
+<div class="painel">
+<h1>GP Assessoria de Manutenções</h1>
+<p style="text-align:center">Emissão de certificados</p>
+<label>Nome completo do aluno</label>
+<input id="nome" placeholder="Digite o nome do aluno">
+<label>Data de conclusão</label>
+<input id="data" type="date">
+<button onclick="gerar()">Gerar certificado</button>
+<p><small>Versão inicial de demonstração. Acesso restrito e validação de certificados ainda precisam ser configurados.</small></p>
+</div>
+<section id="certificado">
+<h3>GP ASSESSORIA DE MANUTENÇÕES</h3>
+<h2>CERTIFICADO</h2>
+<p>Certificamos que</p>
+<p class="aluno" id="alunoCert"></p>
+<p>concluiu o curso de</p>
+<h2>ELÉTRICA RESIDENCIAL BÁSICA</h2>
+<p>com carga horária de <strong>16 horas</strong>.</p>
+<p id="dataCert"></p>
+<div class="assinatura">GP Assessoria de Manutenções<br>Instituição emissora</div>
+</section>
+<script>
+function gerar(){
+const nome=document.getElementById('nome').value.trim();
+const data=document.getElementById('data').value;
+if(!nome||!data){alert('Preencha o nome e a data.');return;}
+const [ano,mes,dia]=data.split('-');
+document.getElementById('alunoCert').textContent=nome;
+document.getElementById('dataCert').textContent='Conclusão: '+dia+'/'+mes+'/'+ano;
+document.getElementById('certificado').style.display='block';
+setTimeout(()=>window.print(),200);
+}
+</script>
+</body>
+</html>
